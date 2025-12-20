@@ -1,0 +1,994 @@
+<SKIPPED_HTML_EDIT_MODE></SKIPPED_HTML_EDIT_MODE>
+<think>
+
+</think>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="home.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muslim Companion</title>
+  <!-- Import TailwindCSS for responsive design -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Import Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta http-equiv="Content-Security-Policy" content="
+default-src 'self';
+script-src 'self' https://cdn.tailwindcss.com;
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+font-src 'self' https://fonts.gstatic.com;">
+  <!-- Import Arabic-friendly font (optional, for better rendering) -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body class="bg-gray-50 p-4">
+  <div class="top-right">
+    <button id="signupBtn"><a href="signup.html">Sign Up</a></button>
+    <button id="loginBtn"><a href="login.html">login</a></button>
+    <button id="signupBtn"><a href="profile.html">profile</a></button>
+  </div>
+
+
+
+
+  <header class="text-center mb-8 fade-in">
+    <h1 class="text-4xl font-bold text-green-700 mb-4">Muslim Companion</h1>
+    <h2>Prayer Times</h2>
+    <div class="prayers">
+      <button class="prayer-btn" data-time="05:00">Fajr - 05:00</button>
+      <button class="prayer-btn" data-time="12:30">Dhuhr - 12:30</button>
+      <button class="prayer-btn" data-time="15:45">Asr - 15:45</button>
+      <button class="prayer-btn" data-time="18:15">Maghrib - 18:15</button>
+      <button class="prayer-btn" data-time="19:45">Isha - 19:45</button>
+    </div>
+    <audio id="iqamaAudio" src="sounds/iqama.mp3"></audio>
+
+    <p>Click any prayer button to play the Iqama sound</p>
+
+    <div class="next-prayer" id="nextPrayer">Next prayer: --:--</div>
+    <p class="text-lg text-gray-600 dark:text-gray-300">Recite the Quran, keep track of your Azkar, and Explore Islamic
+      Books</p>
+    <div class="marquee text-sm mt-2">
+      <span class="marquee-content">Remember Allah often, seek knowledge, and enjoin what is right... Remember Allah
+        often, seek knowledge, and enjoin what is right...</span>
+    </div>
+    <button id="theme-toggle" class="mt-4 btn-primary px-4 py-2 rounded">
+      <i class="fas fa-moon"></i> Toggle Dark Mode
+    </button>
+  </header>
+  <!-- Calendar -->
+  <div id="calendar" class="calendar"></div>
+
+
+  <!-- Hijri Date -->
+  <p id="hijri-date" class="mt-2 text-green-600 font-semibold"></p>
+
+
+  <nav class="flex justify-center mb-8">
+    <button class="tab tab-active px-6 py-2 font-medium" id="quran-tab" onclick="showSection('quran')">Quran
+      Recitation</button>
+    <button class="tab px-6 py-2 font-medium" id="azkar-tab" onclick="showSection('azkar')">Azkar Counter</button>
+    <button class="tab px-6 py-2 font-medium" id="books-tab" onclick="showSection('books')">Islamic Books</button>
+  </nav>
+
+  <!-- Quran Recitation Section -->
+  <section id="quran-section" class="quran-bg p-6 rounded-lg shadow-lg fade-in">
+    <h2 class="text-2xl font-bold mb-4 text-green-800">Quran Recitation</h2>
+    <div class="mb-4">
+      <label for="surah-select" class="block mb-2 font-medium">Choose a Surah:</label>
+      <select id="surah-select" size="20" aria-label="Select Surah" class="w-full p-2 border rounded"
+        style="max-height: 300px; overflow-y: auto; font-size: 1.1rem; font-weight: 600; border: 2px solid #22c55e; background: #e6ffed;">
+        <option value="1">Al-Fātiḥah (The Opening)</option>
+        <option value="2">Al-Baqarah (The Cow)</option>
+        <option value="3">Āl-ʿImrān (The Family of Imran)</option>
+        <option value="4">An-Nisāʾ (The Women)</option>
+        <option value="5">Al-Māʾidah (The Table Spread)</option>
+        <option value="6">Al-Anʿām (The Cattle)</option>
+        <option value="7">Al-Aʿrāf (The Heights)</option>
+        <option value="8">Al-Anfāl (The Spoils of War)</option>
+        <option value="9">At-Tawbah (The Repentance)</option>
+        <option value="10">Yūnus (Jonah)</option>
+        <option value="11">Hūd (Hud)</option>
+        <option value="12">Yūsuf (Joseph)</option>
+        <option value="13">Ar-Raʿd (The Thunder)</option>
+        <option value="14">Ibrāhīm (Abraham)</option>
+        <option value="15">Al-Ḥijr (The Rocky Tract)</option>
+        <option value="16">An-Naḥl (The Bee)</option>
+        <option value="17">Al-Isrāʾ / Banī Isrāʾīl (The Night Journey / The Children of Israel)</option>
+        <option value="18">Al-Kahf (The Cave)</option>
+        <option value="19">Maryam (Mary)</option>
+        <option value="20">Ṭā Hā (Ṭā Hā)</option>
+        <option value="21">Al-Anbiyāʾ (The Prophets)</option>
+        <option value="22">Al-Ḥajj (The Pilgrimage)</option>
+        <option value="23">Al-Muʾminūn (The Believers)</option>
+        <option value="24">An-Nūr (The Light)</option>
+        <option value="25">Al-Furqān (The Criterion)</option>
+        <option value="26">Ash-Shuʿarāʾ (The Poets)</option>
+        <option value="27">An-Naml (The Ant)</option>
+        <option value="28">Al-Qaṣaṣ (The Stories)</option>
+        <option value="29">Al-ʿAnkabūt (The Spider)</option>
+        <option value="30">Ar-Rūm (The Romans)</option>
+        <option value="31">Luqmān (Luqman)</option>
+        <option value="32">As-Sajdah (The Prostration)</option>
+        <option value="33">Al-Aḥzāb (The Confederates)</option>
+        <option value="34">Sabaʾ (Sheba)</option>
+        <option value="35">Fāṭir (The Originator)</option>
+        <option value="36">Yā Sīn (Yaseen)</option>
+        <option value="37">As-Ṣāffāt (Those Who Set the Ranks)</option>
+        <option value="38">Ṣād (Sad)</option>
+        <option value="39">Az-Zumar (The Groups)</option>
+        <option value="40">Ghāfir (The Forgiver)</option>
+        <option value="41">Fuṣṣilat (Explained in Detail)</option>
+        <option value="42">Ash-Shūrā (Consultation)</option>
+        <option value="43">Az-Zukhruf (The Gold Adornments)</option>
+        <option value="44">Ad-Dukhān (The Smoke)</option>
+        <option value="45">Al-Jāthiyah (The Kneeling)</option>
+        <option value="46">Al-Aḥqāf (The Wind-Curved Sandhills)</option>
+        <option value="47">Muḥammad (Muhammad)</option>
+        <option value="48">Al-Fatḥ (The Victory)</option>
+        <option value="49">Al-Ḥujurāt (The Rooms)</option>
+        <option value="50">Qāf (Qaf)</option>
+        <option value="51">Adh-Dhāriyāt (The Winnowing Winds)</option>
+        <option value="52">Aṭ-Ṭūr (The Mount)</option>
+        <option value="53">An-Najm (The Star)</option>
+        <option value="54">Al-Qamar (The Moon)</option>
+        <option value="55">Ar-Raḥmān (The Most Merciful)</option>
+        <option value="56">Al-Wāqiʿah (The Inevitable)</option>
+        <option value="57">Al-Ḥadīd (The Iron)</option>
+        <option value="58">Al-Mujādilah (The Pleading Woman)</option>
+        <option value="59">Al-Ḥashr (The Exile)</option>
+        <option value="60">Al-Mumtaḥanah (She That Is To Be Examined)</option>
+        <option value="61">Aṣ-Ṣaff (The Ranks)</option>
+        <option value="62">Al-Jumuʿah (The Friday Congregation)</option>
+        <option value="63">Al-Munāfiqūn (The Hypocrites)</option>
+        <option value="64">At-Taghābun (The Mutual Disillusion)</option>
+        <option value="65">At-Ṭalāq (The Divorce)</option>
+        <option value="66">At-Taḥrīm (The Prohibition)</option>
+        <option value="67">Al-Mulk (The Sovereignty)</option>
+        <option value="68">Al-Qalam (The Pen)</option>
+        <option value="69">Al-Ḥāqqah (The Inevitable Reality)</option>
+        <option value="70">Al-Maʿārij (The Ascending Stairways)</option>
+        <option value="71">Nūḥ (Noah)</option>
+        <option value="72">Al-Jinn (The Jinn)</option>
+        <option value="73">Al-Muzzammil (The Enshrouded One)</option>
+        <option value="74">Al-Muddaththir (The Cloaked One)</option>
+        <option value="75">Al-Qiyāmah (The Resurrection)</option>
+        <option value="76">Al-Insān / Ad-Dahr (Man / Time)</option>
+        <option value="77">Al-Mursalāt (The Emissaries)</option>
+        <option value="78">An-Nabaʾ (The Tidings)</option>
+        <option value="79">An-Nāziʿāt (Those Who Drag Forth)</option>
+        <option value="80">ʿAbasa (He Frowned)</option>
+        <option value="81">At-Takwīr (The Overthrowing)</option>
+        <option value="82">Al-Infiṭār (The Splitting)</option>
+        <option value="83">Al-Muṭaffifīn (Defrauding)</option>
+        <option value="84">Al-Inshiqāq (The Splitting Asunder)</option>
+        <option value="85">Al-Burūj (The Mansions of the Stars)</option>
+        <option value="86">Aṭ-Ṭāriq (The Morning Star)</option>
+        <option value="87">Al-Aʿlā (The Most High)</option>
+        <option value="88">Al-Ghāshiyah (The Overwhelming)</option>
+        <option value="89">Al-Fajr (The Dawn)</option>
+        <option value="90">Al-Balad (The City)</option>
+        <option value="91">Ash-Shams (The Sun)</option>
+        <option value="92">Al-Layl (The Night)</option>
+        <option value="93">Aḍ-Ḍuḥā (The Morning Hours)</option>
+        <option value="94">Ash-Sharḥ (The Relief / The Expansion)</option>
+        <option value="95">At-Tīn (The Fig)</option>
+        <option value="96">Al-ʿAlaq (The Clot)</option>
+        <option value="97">Al-Qadr (The Power / Destiny)</option>
+        <option value="98">Al-Bayyinah (The Clear Proof)</option>
+        <option value="99">Az-Zalzalah (The Earthquake)</option>
+        <option value="100">Al-ʿĀdiyāt (The Courser)</option>
+        <option value="101">Al-Qāriʿah (The Striking Calamity)</option>
+        <option value="102">At-Takāthur (Rivalry in Worldly Increase)</option>
+        <option value="103">Al-ʿAṣr (The Declining Day / Time)</option>
+        <option value="104">Al-Humazah (The Slanderer)</option>
+        <option value="105">Al-Fīl (The Elephant)</option>
+        <option value="106">Quraysh (Quraish)</option>
+        <option value="107">Al-Māʿūn (Small Kindnesses)</option>
+        <option value="108">Al-Kawthar (Abundance)</option>
+        <option value="109">Al-Kāfirūn (The Disbelievers)</option>
+        <option value="110">An-Naṣr (The Divine Support)</option>
+        <option value="111">Al-Masad (The Palm Fiber / The Flame)</option>
+        <option value="112">Al-Ikhlāṣ (The Sincerity)</option>
+        <option value="113">Al-Falaq (The Daybreak)</option>
+        <option value="114">An-Nās (Mankind)</option>
+      </select>
+
+
+    </div>
+    <div class="loading" id="audio-loading"><i class="fas fa-spinner fa-spin"></i> Loading audio...</div>
+    <audio id="quran-audio" controls preload="none" class="w-full audio-controls">
+      Your browser does not support the audio element.
+    </audio>
+    <div class="mt-2" id="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <div class="mt-4 text-center">
+      <button id="play-paused" class="btn-primary px-6 py-2 rounded mr-2" onclick="togglePlay()"><i
+          class="fas fa-play"></i> Play</button>
+      <button class="btn-secondary px-6 py-2 rounded mr-2" onclick="nextSurah()"><i class="fas fa-step-forward"></i>
+        Next</button>
+      <button class="px-6 py-2 border rounded" onclick="resetAudio()"><i class="fas fa-redo"></i> Reset</button>
+    </div>
+    <p class="mt-4 text-sm text-gray-600">Audio courtesy of Abdul Basit Abdul Samad recited from Islamic Network CDN
+      (free for personal use).</p>
+  </section>
+
+  <!-- Azkar Counter Section -->
+  <section id="azkar-section" class="azkar-bg p-6 rounded-lg shadow-lg bounce-in" style="display:none;">
+    <h2 class="text-2xl font-bold mb-4 text-yellow-800">Azkar Counter</h2>
+    <div class="mb-4">
+      <label for="azkar-select" class="block mb-2 font-medium">Select Azkar:</label>
+      <select id="azkar-select" class="w-full p-2 border rounded dropdown">
+        <option value="">Select Azkar...</option>
+        <option value="subhanallah">سبحان الله (Subhanallah)</option>
+        <option value="alhamdulillah">الحمد لله (Alhamdulillah)</option>
+        <option value="allahakbar">الله أكبر (Allahu Akbar)</option>
+        <option value="astaghfirullah">أستغفر الله (Astaghfirullah)</option>
+        <option value="laillahaillallah">لا إله إلا الله (La Ilaha Illallah)</option>
+        <option value="ihenusmulallaahi">أحسنت وأجملت (Ihsenus Mumallaahi)</option>
+        <!-- Add more common Azkar -->
+      </select>
+    </div>
+    <div class="text-center mb-4">
+      <span id="azkar-text" class="arabic-text block mb-2"></span>
+      <div class="counter-display" id="counter">0</div>
+      <div class="mt-2">
+        <input type="range" id="target-slider" min="1" max="500" value="33" onchange="setTarget(this.value)">
+        <div id="target-display" class="text-sm">Target: 33</div>
+      </div>
+    </div>
+    <div class="text-center">
+      <button class="btn-primary px-6 py-2 rounded mr-2" onclick="incrementCounter()"><i class="fas fa-plus"></i>
+        Count</button>
+      <button class="px-6 py-2 border rounded mr-2" onclick="saveProgress()"><i class="fas fa-save"></i> Save</button>
+      <button class="px-6 py-2 border rounded" onclick="resetCounter()"><i class="fas fa-redo"></i> Reset</button>
+    </div>
+    <p id="history" class="mt-4 text-sm"></p>
+  </section>
+
+  <!-- Islamic Books Section -->
+  <section id="books-section" class="books-bg fade-in" style="display:none;">
+    <h3 class="text-2xl font-bold mb-4 text-center text-brown-800">Important Muslim Books</h3>
+    <ul id="books-list">
+      <li onclick="showBookModal('quran')">
+        <span><i class="fas fa-book-open"></i> القرآن الكريم (The Holy Quran)</span>
+        <button class="btn-primary px-4 py-2 rounded" onclick="readBook('quran', event)">Read Now</button>
+      </li>
+      <li onclick="showBookModal('bukhari')">
+        <span><i class="fas fa-scroll"></i> صحيح البخاري (Sahih al-Bukhari)</span>
+        <button class="btn-primary px-4 py-2 rounded" onclick="readBook('bukhari', event)">Read Now</button>
+      </li>
+      <li onclick="showBookModal('muslim')">
+        <span><i class="fas fa-scroll"></i> صحيح مسلم (Sahih Muslim)</span>
+        <button class="btn-primary px-4 py-2 rounded" onclick="readBook('muslim', event)">Read Now</button>
+      </li>
+      <li onclick="showBookModal('riyadh')">
+        <span><i class="fas fa-scroll"></i> رياض الصالحين (Riyadh as-Salihin)</span>
+        <button class="btn-primary px-4 py-2 rounded" onclick="readBook('riyadh', event)">Read Now</button>
+      </li>
+      <li onclick="showBookModal('tafsir')">
+        <span><i class="fas fa-scroll"></i> تفسير ابن كثير (Tafsir Ibn Kathir)</span>
+        <button class="btn-primary px-4 py-2 rounded" onclick="readBook('tafsir', event)">Read Now</button>
+      </li>
+      <li onclick="showBookModal('arbaeen')">
+        <span><i class="fas fa-scroll"></i> الأربعون النووية (Al-Arba'in An-Nawawiyyah)</span>
+        <button class="btn-primary px-4 py-2 rounded" onclick="readBook('arbaeen', event)">Read Now</button>
+      </li>
+      <li onclick="showBookModal('fiqh')">
+        <span><i class="fas fa-scroll"></i> فقه السنة (Fiqh as-Sunnah)</span>
+        <button class="btn-primary px-4 py-2 rounded" onclick="readBook('fiqh', event)">Read Now</button>
+      </li>
+      <li onclick="showBookModal('ihya')">
+        <span><i class="fas fa-scroll"></i> إحياء علوم الدين (Ihya Ulum al-Din)</span>
+        <button class="btn-primary px-4 py-2 rounded" onclick="readBook('ihya', event)">Read Now</button>
+      </li>
+      <li onclick="showBookModal('seerah')">
+        <span><i class="fas fa-scroll"></i> السيرة النبوية (Seerah of the Prophet Muhammad ﷺ)</span>
+        <button class="btn-primary px-4 py-2 rounded" onclick="readBook('seerah', event)">Read Now</button>
+      </li>
+      <li onclick="showBookModal('zad')">
+        <span><i class="fas fa-scroll"></i> زاد المعاد (Zad al-Ma'ad)</span>
+        <button class="btn-primary px-4 py-2 rounded" onclick="readBook('zad', event)">Read Now</button>
+      </li>
+    </ul>
+    <div id="book-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h4 id="modal-title" class="text-xl font-bold mb-4"></h4>
+        <p id="modal-description" class="mb-4"></p>
+        <div id="reading-pane" class="mb-4">
+          <!-- Dynamic content for reading the book -->
+        </div>
+        <div class="mt-4">
+          <button onclick="closeModal()" class="btn-secondary px-6 py-2 rounded mr-2">Close</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  </section><!-- 🕋 Daily Dua / Supplication Section -->
+  <section id="daily-dua"
+    class="relative bg-gradient-to-br from-green-50 via-emerald-100 to-green-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 rounded-3xl shadow-2xl border border-green-300 dark:border-green-800 m-6 p-8 text-center transition-all duration-500 hover:shadow-green-300/30">
+
+    <!-- Decorative Islamic Pattern -->
+    <div
+      class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://upload.wikimedia.org/wikipedia/commons/9/99/Islamic_Pattern.svg')] bg-contain bg-center rounded-3xl pointer-events-none">
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10">
+      <h2 class="text-3xl font-bold text-green-700 dark:text-green-400 mb-4 tracking-wide">
+        🤲 Daily Dua / Supplication
+      </h2>
+
+      <div
+        class="bg-white/80 dark:bg-gray-800/70 rounded-2xl p-6 shadow-inner border border-green-200 dark:border-gray-700 backdrop-blur-md">
+        <p id="dua-arabic" class="text-2xl text-green-800 dark:text-green-300 font-semibold leading-relaxed mb-3"
+          dir="rtl"></p>
+        <p id="dua-english" class="text-gray-800 dark:text-gray-100 text-lg leading-relaxed mb-3 font-medium"></p>
+        <p id="dua-reference" class="text-green-700 dark:text-green-400 text-sm italic"></p>
+      </div>
+
+      <button id="new-dua-btn"
+        class="mt-6 px-5 py-2 bg-green-600 text-white rounded-full shadow-md hover:bg-green-700 hover:shadow-lg transition-all duration-300 focus:ring-2 focus:ring-green-400 focus:outline-none">
+        🔄 New Dua
+      </button>
+    </div>
+  </section>
+
+  <script>
+    // 🕋 Local list of daily duas (offline)
+    const dailyDuas = [
+      {
+        arabic: "رَبِّ زِدْنِي عِلْمًا",
+        english: "My Lord, increase me in knowledge.",
+        ref: "— Qur’an 20:114"
+      },
+      {
+        arabic: "رَبِّ اشْرَحْ لِي صَدْرِي",
+        english: "My Lord, open my chest for me (grant me confidence).",
+        ref: "— Qur’an 20:25"
+      },
+      {
+        arabic: "اللّهُمَّ اغْفِرْ لِي",
+        english: "O Allah, forgive me.",
+        ref: "— Hadith (Muslim)"
+      },
+      {
+        arabic: "اللّهُمَّ ارْحَمْنِي",
+        english: "O Allah, have mercy on me.",
+        ref: "— Hadith (Bukhari)"
+      },
+      {
+        arabic: "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+        english: "Guide us to the straight path.",
+        ref: "— Qur’an 1:6"
+      },
+      {
+        arabic: "رَبَّنَا ظَلَمْنَا أَنْفُسَنَا",
+        english: "Our Lord, we have wronged ourselves.",
+        ref: "— Qur’an 7:23"
+      },
+      {
+        arabic: "رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ",
+        english: "My Lord, forgive me and my parents.",
+        ref: "— Qur’an 71:28"
+      },
+      {
+        arabic: "اللّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ",
+        english: "O Allah, I ask You for Paradise.",
+        ref: "— Hadith (Abu Dawood)"
+      },
+      {
+        arabic: "اللّهُمَّ أَجِرْنِي مِنَ النَّارِ",
+        english: "O Allah, protect me from the Fire.",
+        ref: "— Hadith (Tirmidhi)"
+      },
+      {
+        arabic: "رَبَّنَا تَقَبَّلْ مِنَّا",
+        english: "Our Lord, accept (this) from us.",
+        ref: "— Qur’an 2:127"
+      },
+      {
+        arabic: "أَسْتَغْفِرُ اللَّهَ",
+        english: "I seek forgiveness from Allah.",
+        ref: "— Hadith (Bukhari)"
+      },
+      {
+        arabic: "اللّهُمَّ اغْفِرْ لِي ذَنْبِي كُلَّهُ",
+        english: "O Allah, forgive me all my sins.",
+        ref: "— Hadith (Muslim)"
+      },
+      {
+        arabic: "رَبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ",
+        english: "My Lord, forgive and have mercy; You are the best of the merciful.",
+        ref: "— Qur’an 23:118"
+      },
+      {
+        arabic: "اللّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي",
+        english: "O Allah, You are Forgiving and love forgiveness, so forgive me.",
+        ref: "— Hadith (Tirmidhi)"
+      },
+      {
+        arabic: "اللّهُمَّ طَهِّرْ قَلْبِي مِنَ الذُّنُوبِ",
+        english: "O Allah, purify my heart from sins.",
+        ref: "— Hadith (Ahmad)"
+      },
+      {
+        arabic: "اللّهُمَّ بِكَ أَصْبَحْنَا وَبِكَ أَمْسَيْنَا",
+        english: "O Allah, by You we enter the morning and by You we enter the evening.",
+        ref: "— Hadith (Abu Dawood)"
+      },
+      {
+        arabic: "اللّهُمَّ مَا أَصْبَحَ بِي مِنْ نِعْمَةٍ فَمِنْكَ وَحْدَكَ",
+        english: "O Allah, whatever blessing I have this morning is from You alone.",
+        ref: "— Hadith (Abu Dawood)"
+      },
+      {
+        arabic: "اللّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ هَذَا الْيَوْمِ",
+        english: "O Allah, I ask You for the good of this day.",
+        ref: "— Hadith (Muslim)"
+      },
+      {
+        arabic: "اللّهُمَّ أَعُوذُ بِكَ مِنْ شَرِّ هَذَا الْيَوْمِ",
+        english: "O Allah, I seek refuge in You from the evil of this day.",
+        ref: "— Hadith (Muslim)"
+      },
+      {
+        arabic: "اللّهُمَّ إِنِّي أَسْلَمْتُ نَفْسِي إِلَيْكَ",
+        english: "O Allah, I have submitted myself to You.",
+        ref: "— Hadith (Bukhari)"
+      },
+      {
+        arabic: "بِاسْمِكَ اللّهُمَّ أَحْيَا وَبِاسْمِكَ أَمُوتُ",
+        english: "In Your name, O Allah, I live and die.",
+        ref: "— Hadith (Bukhari)"
+      },
+      {
+        arabic: "اللّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ",
+        english: "O Allah, protect me from Your punishment on the Day You resurrect Your servants.",
+        ref: "— Hadith (Muslim)"
+      },
+      {
+        arabic: "اللّهُمَّ إِنِّي وَضَعْتُ نَفْسِي بِيَدِكَ",
+        english: "O Allah, I place my soul in Your hands.",
+        ref: "— Hadith (Tirmidhi)"
+      },
+      {
+        arabic: "اللّهُمَّ صَيِّبًا نَافِعًا",
+        english: "O Allah, make it a beneficial rain.",
+        ref: "— Hadith (Bukhari)"
+      },
+      {
+        arabic: "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",
+        english: "Allah is sufficient for us, and He is the Best Disposer of affairs.",
+        ref: "— Qur’an 3:173"
+      },
+
+
+
+
+
+
+
+
+      {
+        arabic: "اللّهُمَّ فَرِّجْ كُرُوبَنَا",
+        english: "O Allah, relieve our hardships.",
+        ref: "— Hadith (Ahmad)"
+      },
+      {
+        arabic: "اللّهُمَّ اجْعَلْ لِي مِن كُلِّ هَمٍّ فَرَجًا",
+        english: "O Allah, make for me a way out of every worry.",
+        ref: "— Hadith (Tirmidhi)"
+      },
+      {
+        arabic: "اللّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ وَمِنْ خَلْفِي",
+        english: "O Allah, protect me from in front of me and from behind me.",
+        ref: "— Hadith (Abu Dawood)"
+      },
+      {
+        arabic: "اللّهُمَّ أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ",
+        english: "O Allah, I seek refuge in You from anxiety and sorrow.",
+        ref: "— Hadith (Bukhari)"
+      },
+      {
+        arabic: "اللّهُمَّ أَعُوذُ بِكَ مِنَ الْفَقْرِ وَالْكَسَلِ",
+        english: "O Allah, I seek refuge in You from poverty and laziness.",
+        ref: "— Hadith (Bukhari)"
+      },
+      {
+        arabic: "اللّهُمَّ أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي",
+        english: "O Allah, I seek refuge in You from the evil of my soul.",
+        ref: "— Hadith (Muslim)"
+      },
+      {
+        arabic: "اللّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ",
+        english: "O Allah, I seek refuge in You from the punishment of the grave.",
+        ref: "— Hadith (Muslim)"
+      },
+      {
+        arabic: "اللّهُمَّ ارْزُقْنِي رِزْقًا حَلَالًا طَيِّبًا",
+        english: "O Allah, provide me with lawful and good sustenance.",
+        ref: "— Hadith (Ibn Majah)"
+      },
+      {
+        arabic: "اللّهُمَّ بَارِكْ لِي فِي رِزْقِي",
+        english: "O Allah, bless me in my provision.",
+        ref: "— Hadith (Ahmad)"
+      },
+      {
+        arabic: "رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ",
+        english: "My Lord, I am in need of whatever good You send down to me.",
+        ref: "— Qur’an 28:24"
+      },
+      {
+        arabic: "اللّهُمَّ ثَبِّتْ قَلْبِي عَلَى دِينِكَ",
+        english: "O Allah, make my heart firm upon Your religion.",
+        ref: "— Hadith (Tirmidhi)"
+      },
+      {
+        arabic: "اللّهُمَّ اجْعَلْنِي مِنَ الصَّالِحِينَ",
+        english: "O Allah, make me among the righteous.",
+        ref: "— Qur’an 26:83"
+      },
+      {
+        arabic: "اللّهُمَّ نَوِّرْ قَلْبِي بِنُورِ الْإِيمَانِ",
+        english: "O Allah, fill my heart with the light of faith.",
+        ref: "— Hadith (Ahmad)"
+      },
+      {
+        arabic: "رَبِّ هَبْ لِي حُكْمًا وَأَلْحِقْنِي بِالصَّالِحِينَ",
+        english: "My Lord, grant me wisdom and join me with the righteous.",
+        ref: "— Qur’an 26:83"
+      },
+      {
+        arabic: "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ",
+        english: "Our Lord, grant us from our spouses and offspring comfort to our eyes.",
+        ref: "— Qur’an 25:74"
+      },
+      {
+        arabic: "اللّهُمَّ أَلِّفْ بَيْنَ قُلُوبِنَا",
+        english: "O Allah, unite our hearts.",
+        ref: "— Qur’an 3:103"
+      },
+      {
+        arabic: "اللّهُمَّ اجْعَلْ بَيْتَنَا مَسْكَنَ سَكِينَةٍ",
+        english: "O Allah, make our home a place of peace and tranquility.",
+        ref: "— Hadith (Muslim)"
+      },
+      {
+        arabic: "اللّهُمَّ عَلِّمْنِي مَا يَنْفَعُنِي",
+        english: "O Allah, teach me what benefits me.",
+        ref: "— Hadith (Ibn Majah)"
+      },
+      {
+        arabic: "اللّهُمَّ فَقِّهْنِي فِي الدِّينِ",
+        english: "O Allah, grant me understanding in religion.",
+        ref: "— Hadith (Bukhari)"
+      },
+      {
+        arabic: "اللّهُمَّ اجْعَلْنِي مِنْ أَهْلِ الْعِلْمِ",
+        english: "O Allah, make me among the people of knowledge.",
+        ref: "— Hadith (Ahmad)"
+      },
+      {
+        arabic: "اللّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ",
+        english: "O Allah, You are the Companion during travel.",
+        ref: "— Hadith (Muslim)"
+      },
+      {
+        arabic: "اللّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا",
+        english: "O Allah, make this journey easy for us.",
+        ref: "— Hadith (Muslim)"
+      },
+      {
+        arabic: "اللّهُمَّ رُدَّنَا إِلَى أَهْلِنَا سَالِمِينَ",
+        english: "O Allah, return us safely to our families.",
+        ref: "— Hadith (Bukhari)"
+      },
+      {
+        arabic: "اللّهُمَّ ارْزُقْنِي الصِّدْقَ فِي الْقَوْلِ وَالْعَمَلِ",
+        english: "O Allah, grant me sincerity in words and actions.",
+        ref: "— Hadith (Ibn Hibban)"
+      },
+      {
+        arabic: "اللّهُمَّ اجْعَلْ خَيْرَ أَعْمَالِي خَوَاتِيمَهَا",
+        english: "O Allah, make the best of my deeds the last of them.",
+        ref: "— Hadith (Ahmad)"
+      },
+
+
+
+
+    ];
+
+    // 🌙 Function to show random dua
+    function showDua() {
+      const randomIndex = Math.floor(Math.random() * dailyDuas.length);
+      const dua = dailyDuas[randomIndex];
+      document.getElementById("dua-arabic").innerText = dua.arabic;
+      document.getElementById("dua-english").innerText = dua.english;
+      document.getElementById("dua-reference").innerText = dua.ref;
+      animateDua();
+    }
+
+    // 🕊️ Smooth fade animation
+    function animateDua() {
+      const duaArabic = document.getElementById("dua-arabic");
+      const duaEnglish = document.getElementById("dua-english");
+      duaArabic.style.opacity = 0;
+      duaEnglish.style.opacity = 0;
+      setTimeout(() => {
+        duaArabic.style.opacity = 1;
+        duaEnglish.style.opacity = 1;
+      }, 200);
+    }
+
+    // 🌞 Show one dua when page loads
+    window.addEventListener("load", showDua);
+
+    // 🔄 Show new dua when button clicked
+    document.getElementById("new-dua-btn").addEventListener("click", showDua);
+  </script>
+
+
+  <footer class="text-center mt-8 text-gray-500">
+    <p>© 2025 Muslim Companion.
+      For educational purposes. May Allah accept our efforts. Ameen.</p>
+  </footer>
+
+  <script>
+    const audio = document.getElementById('iqamaAudio');
+    const buttons = document.querySelectorAll('.prayer-btn');
+    const nextPrayerEl = document.getElementById('nextPrayer');
+
+    // Convert prayer times to minutes
+    const prayerTimes = Array.from(buttons).map(btn => {
+      const [hour, min] = btn.dataset.time.split(':').map(Number);
+      return { name: btn.textContent.split(' - ')[0], hour, min, element: btn };
+    });
+
+    // Play audio manually
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        audio.play();
+        alert(`${btn.textContent.split(' - ')[0]} alarm activated!`);
+      });
+    });
+
+    // Find next prayer
+    function getNextPrayer() {
+      const now = new Date();
+      const nowMinutes = now.getHours() * 60 + now.getMinutes();
+
+      for (let p of prayerTimes) {
+        const prayerMinutes = p.hour * 60 + p.min;
+        if (prayerMinutes > nowMinutes) return p;
+      }
+      // If all prayers passed, return first prayer of next day
+      return prayerTimes[0];
+    }
+
+    // Update next prayer countdown
+    function updateNextPrayer() {
+      const now = new Date();
+      const next = getNextPrayer();
+      const nextDate = new Date();
+      nextDate.setHours(next.hour, next.min, 0, 0);
+
+      if (nextDate < now) nextDate.setDate(nextDate.getDate() + 1);
+
+      const diff = nextDate - now;
+      const hours = Math.floor(diff / 1000 / 60 / 60);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      nextPrayerEl.textContent = `Next prayer: ${next.name} in ${hours}h ${minutes}m ${seconds}s`;
+
+      // Play sound exactly at prayer time
+      if (diff < 1000 && diff > 0) {
+        audio.play();
+        alert(`It's time for ${next.name}`);
+      }
+    }
+
+    // Update every second
+    setInterval(updateNextPrayer, 1000);
+
+    // Enhanced Variables and State Management
+    let currentAudio = document.getElementById('quran-audio');
+    let isPlaying = false;
+    let azkarCount = 0;
+    let azkarTarget = 33;
+    let selectedAzkar = '';
+    let currentSurah = 0;
+    const historyList = [];
+    const savedCounts = JSON.parse(localStorage.getItem('azkarCounts')) || {};
+    let selectedBook = '';
+
+    // Toggle dark mode
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const azkarSec = document.getElementById('azkar-section');
+      const quranSec = document.getElementById('quran-section');
+      const booksSec = document.getElementById('books-section');
+      azkarSec.classList.toggle('dark-mode');
+      quranSec.classList.toggle('dark-mode');
+      booksSec.classList.toggle('dark-mode');
+    });
+
+    // Show sections with animation
+    function showSection(section) {
+      const quranTab = document.getElementById('quran-tab');
+      const azkarTab = document.getElementById('azkar-tab');
+      const booksTab = document.getElementById('books-tab');
+      const quranSec = document.getElementById('quran-section');
+      const azkarSec = document.getElementById('azkar-section');
+      const booksSec = document.getElementById('books-section');
+
+      [quranTab, azkarTab, booksTab].forEach(tab => tab.classList.remove('tab-active'));
+      [quranSec, azkarSec, booksSec].forEach(sec => sec.style.display = 'none');
+
+      if (section === 'quran') {
+        quranSec.style.display = 'block';
+        quranTab.classList.add('tab-active');
+      } else if (section === 'azkar') {
+        azkarSec.style.display = 'block';
+        azkarTab.classList.add('tab-active');
+      } else if (section === 'books') {
+        booksSec.style.display = 'block';
+        booksTab.classList.add('tab-active');
+      }
+    }
+
+    // Quran functions with loading and error handling
+    document.getElementById('surah-select').addEventListener('change', (e) => {
+      const surahNumber = e.target.value;
+      if (!surahNumber) return;
+      currentSurah = parseInt(surahNumber);
+      const loading = document.getElementById('audio-loading');
+      const controls = document.querySelector('.audio-controls');
+      loading.style.display = 'block';
+      controls.classList.remove('show');
+      currentAudio.src = `https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${surahNumber}.mp3`;
+      currentAudio.load();
+      currentAudio.onloadeddata = () => {
+        loading.style.display = 'none';
+        controls.classList.add('show');
+      };
+      currentAudio.onerror = () => {
+        loading.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Audio failed to load.';
+        setTimeout(() => loading.style.display = 'none', 3000);
+      };
+    });
+
+    // Progress bar update
+    currentAudio.ontimeupdate = () => {
+      const progressBar = document.getElementById('progress-bar');
+      const percentage = (currentAudio.currentTime / currentAudio.duration) * 100;
+      progressBar.style.width = percentage + '%';
+    };
+
+    function togglePlay() {
+      if (isPlaying) {
+        currentAudio.pause();
+        document.getElementById('play-paused').innerHTML = '<i class="fas fa-play"></i> Play';
+      } else {
+        currentAudio.play();
+        document.getElementById('play-paused').innerHTML = '<i class="fas fa-pause"></i> Pause';
+      }
+      isPlaying = !isPlaying;
+    }
+
+    function resetAudio() {
+      currentAudio.currentTime = 0;
+      currentAudio.pause();
+      document.getElementById('play-paused').innerHTML = '<i class="fas fa-play"></i> Play';
+      document.getElementById('progress-bar').style.width = '0%';
+      isPlaying = false;
+    }
+
+    function nextSurah() {
+      if (currentSurah < 114) {
+        currentSurah++;
+        const select = document.getElementById('surah-select');
+        select.value = currentSurah.toString();
+        select.dispatchEvent(new Event('change'));
+      } else {
+        alert('You have reached the last Surah!');
+      }
+    }
+
+    // Azkar functions with persistence and advanced features
+    document.getElementById('azkar-select').addEventListener('change', (e) => {
+      selectedAzkar = e.target.value;
+      if (selectedAzkar && savedCounts[selectedAzkar]) {
+        azkarCount = savedCounts[selectedAzkar] || 0;
+      } else {
+        azkarCount = 0;
+      }
+      document.getElementById('azkar-text').textContent = e.target.options[e.target.selectedIndex].textContent;
+      document.getElementById('counter').textContent = azkarCount;
+      document.getElementById('history').textContent = `History: ${historyList.slice(-3).join(', ')}`;
+    });
+
+    function setTarget(value) {
+      azkarTarget = parseInt(value);
+      document.getElementById('target-display').textContent = `Target: ${azkarTarget}`;
+    }
+
+    function incrementCounter() {
+      if (!selectedAzkar) {
+        alert('Please select an Azkar first.');
+        return;
+      }
+      azkarCount++;
+      if (azkarCount >= azkarTarget) {
+        showCongrats();
+      }
+      document.getElementById('counter').textContent = azkarCount;
+      historyList.push(`${selectedAzkar}: ${azkarCount}`);
+      savedCounts[selectedAzkar] = azkarCount;
+      localStorage.setItem('azkarCounts', JSON.stringify(savedCounts));
+      document.getElementById('history').textContent = `History: ${historyList.slice(-3).join(', ')}`;
+    }
+
+    function resetCounter() {
+      azkarCount = 0;
+      document.getElementById('counter').textContent = azkarCount;
+      savedCounts[selectedAzkar] = 0;
+      localStorage.setItem('azkarCounts', JSON.stringify(savedCounts));
+      document.getElementById('history').textContent = 'History: Reset.';
+      historyList.length = 0;
+    }
+
+    function saveProgress() {
+      savedCounts[selectedAzkar] = azkarCount;
+      localStorage.setItem('azkarCounts', JSON.stringify(savedCounts));
+      alert('Progress saved!');
+    }
+
+    function showCongrats() {
+      const congrats = document.createElement('div');
+      congrats.innerHTML = '<i class="fas fa-star"></i> Congratulations! Target reached. Barakah!';
+      congrats.className = 'fixed top-10 right-10 bg-green-500 text-white p-4 rounded-lg shadow-lg animate-bounce';
+      document.body.appendChild(congrats);
+      setTimeout(() => {
+        congrats.remove();
+      }, 5000);
+    }
+
+    // Books JavaScript functionality
+    const bookData = {
+      quran: {
+        title: 'القرآن الكريم (The Holy Quran)',
+        description: 'The Holy Quran is the central religious text of Islam, believed to be the word of Allah as revealed to Prophet Muhammad (PBUH). It consists of 114 Surahs and is the ultimate source of guidance for Muslims.',
+        readLink: 'https://quran.com/'
+      },
+      bukhari: {
+        title: 'صحيح البخاري (Sahih al-Bukhari)',
+        description: 'One of the most authentic collections of Hadith, compiled by Imam Muhammad Ibn Ismail Al-Bukhari. It contains over 7,000 Hadiths.',
+        readLink: 'https://sunnah.com/bukhari'
+      },
+      muslim: {
+        title: 'صحيح مسلم (Sahih Muslim)',
+        description: 'Another major Hadith collection compiled by Imam Muslim Ibn Al-Hajjaj. It is highly regarded for its authenticity.',
+        readLink: 'https://sunnah.com/muslim'
+      },
+      riyadh: {
+        title: 'رياض الصالحين (Riyadh as-Salihin)',
+        description: 'A collection of Hadiths focused on righteous deeds, compiled by Imam An-Nawawi.',
+        readLink: 'https://sunnah.com/riyadussalihin'
+      },
+      tafsir: {
+        title: 'تفسير ابن كثير (Tafsir Ibn Kathir)',
+        description: 'An exegesis of the Quran by Ibn Kathir, providing interpretations and explanations of verses.',
+        readLink: 'https://www.al-islam.org/tafsir-muslims/tafsir-al-kathir'
+      },
+      arbaeen: {
+        title: 'الأربعون النووية (Al-Arba\'in An-Nawawiyyah)',
+        description: 'Forty selected Hadiths by Imam An-Nawawi, covering essential aspects of Islam.',
+        readLink: 'https://sunnah.com/nawawi40'
+      },
+      fiqh: {
+        title: 'فقه السنة (Fiqh as-Sunnah)',
+        description: 'A book on Islamic jurisprudence based on the Sunnah of the Prophet (PBUH).',
+        readLink: 'https://www.islamicfinder.org/books/fiqh-as-sunnah/'
+      },
+      ihya: {
+        title: 'إحياء علوم الدين (Ihya Ulum al-Din)',
+        description: 'A comprehensive work by Imam Al-Ghazali on reviving the religious sciences.',
+        readLink: 'https://alghazali.org/library/ihya/'
+      },
+      seerah: {
+        title: 'السيرة النبوية (Seerah of the Prophet Muhammad ﷺ)',
+        description: 'Biography of Prophet Muhammad (PBUH), detailing his life and teachings.',
+        readLink: 'https://arqadhi.blogspot.com/'
+      },
+      zad: {
+        title: 'زاد المعاد (Zad al-Ma\'ad)',
+        description: 'A detailed biography of the Prophet (PBUH) by Ibn Qayyim.',
+        readLink: 'https://www.islamicfinder.org/books/zad-ul-maad/'
+      }
+    };
+
+
+
+    function closeModal() {
+      document.getElementById('book-modal').style.display = 'none';
+    }
+
+    function readBook(bookId, event) {
+      event.stopPropagation(); // Prevent triggering li click
+      const book = bookData[bookId];
+      if (!book) return;
+      selectedBook = bookId;
+      document.getElementById('modal-title').textContent = book.title;
+      document.getElementById('modal-description').textContent = book.description;
+      const readingPane = document.getElementById('reading-pane');
+      readingPane.innerHTML = `
+                <iframe class="iframe-container" src="${book.readLink}" allowfullscreen></iframe>
+                <p class="mt-2 text-sm">If the content does not load, you can <a href="${book.readLink}" target="_blank" class="text-blue-500 underline">open it in a new tab</a>.</p>
+            `;
+      document.getElementById('book-modal').style.display = 'block';
+    }
+
+    // On load, check for saved counts
+    Object.keys(savedCounts).forEach(azkar => {
+      document.getElementById('azkar-select').innerHTML += `<option value="${azkar}">Saved: ${azkar}</option>`;
+    });
+
+    // Click outside modal to close
+    window.onclick = function (event) {
+      if (event.target === document.getElementById('book-modal')) {
+        closeModal();
+      }
+    };
+  </script>
+  <!-- Hijri Date Script -->
+  <script>
+    async function loadHijriDate() {
+      try {
+        // Format today's date in dd-mm-yyyy
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const year = today.getFullYear();
+        const formattedDate = `${day}-${month}-${year}`;
+
+        // Fetch Hijri date from Aladhan API
+        const response = await fetch(`https://api.aladhan.com/v1/gToH?date=${formattedDate}`);
+        const data = await response.json();
+
+        const hijri = data.data.hijri;
+        const gregorian = data.data.gregorian;
+
+        // Display both Gregorian and Hijri dates
+        const displayText = `📅 ${gregorian.weekday.en}, ${gregorian.date} / 🕌 ${hijri.day} ${hijri.month.en} ${hijri.year} AH`;
+        document.getElementById("hijri-date").textContent = displayText;
+      } catch (error) {
+        console.error("Hijri API error:", error);
+        document.getElementById("hijri-date").textContent = "Hijri date unavailable";
+      }
+    }
+
+    // Run immediately
+    loadHijriDate();
+
+    // Refresh date every 24 hours (in case page stays open)
+    setInterval(loadHijriDate, 24 * 60 * 60 * 1000);
+  </script>
+
+
+
+
+</body>
+
+</html>
+</content>
+</create_file>

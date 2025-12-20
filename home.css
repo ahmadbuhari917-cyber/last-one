@@ -1,0 +1,461 @@
+ body {
+     font-family: Arial, sans-serif;
+     background: #f5f5f5;
+     margin: 0;
+     padding: 0;
+ }
+
+ /* Top-right container */
+ .top-right {
+     position: absolute;
+     top: 20px;
+     right: 20px;
+ }
+
+ button {
+     padding: 10px 20px;
+     margin-left: 10px;
+     font-size: 15px;
+     border-radius: 8px;
+     border: none;
+     cursor: pointer;
+     transition: 0.2s;
+ }
+
+ #signupBtn {
+     background: #20cc11;
+     color: white;
+ }
+
+ #signupBtn:hover {
+     background: #06500b;
+
+ }
+
+ #loginBtn {
+     background: #20cc11;
+
+ }
+
+ #loginBtn:hover {
+     background: #158b06;
+ }
+
+
+
+ body {
+     font-family: Arial, sans-serif;
+     padding: 20px;
+     background: #f0f8ff;
+     text-align: center;
+ }
+
+ .prayers {
+     display: flex;
+     justify-content: center;
+     gap: 10px;
+     margin-bottom: 20px;
+     flex-wrap: wrap;
+ }
+
+ .prayer-btn {
+     background: #06c90f;
+     color: white;
+     border: none;
+     padding: 10px 16px;
+     border-radius: 8px;
+     font-size: 14px;
+     cursor: pointer;
+ }
+
+ .prayer-btn:hover {
+     background: #40960f;
+ }
+
+ .next-prayer {
+     margin-top: 20px;
+     font-size: 18px;
+ }
+
+ /* Enhanced Custom CSS for animations and Islamic-inspired styling */
+ body {
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     background: linear-gradient(to bottom, #f0f9ff, #e0f2fe);
+     /* Soft blue-green gradient for calm */
+     transition: background 0.5s ease, color 0.5s ease;
+ }
+
+ .arabic-text {
+     font-family: 'Amiri', serif;
+     /* Arabic-friendly font, fallback to serif */
+     font-size: 1.2em;
+     direction: rtl;
+ }
+
+ .fade-in {
+     animation: fadeIn 0.5s ease-in;
+ }
+
+ .bounce-in {
+     animation: bounceIn 0.8s ease-out;
+ }
+
+ @keyframes fadeIn {
+     from {
+         opacity: 0;
+         transform: translateY(20px);
+     }
+
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ @keyframes bounceIn {
+     0% {
+         transform: scale(0.1);
+         opacity: 0;
+     }
+
+     50% {
+         transform: scale(1.1);
+         opacity: 1;
+     }
+
+     100% {
+         transform: scale(1);
+     }
+ }
+
+ .tab-active {
+     border-bottom: 3px solid #22c55e;
+     /* Green for active tab */
+     color: #22c55e;
+ }
+
+ .quran-bg {
+     background: linear-gradient(to right, #dcfce7, #bbf7d0);
+     /* Light green for Quranic section */
+     transition: background 0.5s ease;
+ }
+
+ .azkar-bg {
+     background: linear-gradient(to right, #fef08a, #fde68a);
+     /* Soft yellow for Azkar section */
+     transition: background 0.5s ease;
+ }
+
+ .books-bg {
+     background: linear-gradient(to right, #fef3c7, #fde68a);
+     /* Warm yellow for books */
+     transition: background 0.5s ease;
+     border-radius: 1rem;
+     padding: 2rem;
+     margin-top: 3rem;
+     box-shadow: 0 4px 15px rgba(252, 211, 77, 0.4);
+     color: #92400e;
+ }
+
+ .btn-primary {
+     background: #22c55e;
+     color: white;
+     transition: background-color 0.3s, transform 0.2s ease;
+ }
+
+ .btn-primary:hover {
+     background: #16a34a;
+     transform: translateY(-2px);
+ }
+
+ .btn-secondary {
+     background: #f59e0b;
+     color: white;
+     transition: background-color 0.3s, transform 0.2s ease;
+ }
+
+ .btn-secondary:hover {
+     background: #d97706;
+     transform: translateY(-2px);
+ }
+
+ .counter-display {
+     font-size: 2em;
+     font-weight: bold;
+     color: #22c55e;
+     transition: color 0.3s;
+ }
+
+ .progress-bar {
+     width: 0%;
+     height: 10px;
+     background: #22c55e;
+     transition: width 0.3s;
+ }
+
+ .loading {
+     display: none;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     color: #22c55e;
+     font-size: 1.2em;
+ }
+
+ .audio-controls {
+     opacity: 0;
+     transition: opacity 0.5s;
+ }
+
+ .audio-controls.show {
+     opacity: 1;
+ }
+
+ /* Marquee for Islamic dates or reminders */
+ .marquee {
+     overflow: hidden;
+     position: relative;
+     white-space: nowrap;
+ }
+
+ .marquee-content {
+     animation: marquee 20s linear infinite;
+ }
+
+ @keyframes marquee {
+     0% {
+         transform: translateX(100%);
+     }
+
+     100% {
+         transform: translateX(-100%);
+     }
+ }
+
+ /* Custom scrollbar for Surah select */
+ #surah-select {
+     max-height: 300px;
+     overflow-y: auto;
+     font-size: 1.1rem;
+     font-weight: 600;
+     border: 2px solid #22c55e;
+     border-radius: 0.5rem;
+     padding: 0.5rem;
+     background: #e6ffed;
+     transition: border-color 0.3s ease;
+ }
+
+ #surah-select:hover,
+ #surah-select:focus {
+     border-color: #16a34a;
+     outline: none;
+     background: #d1fae5;
+ }
+
+ #surah-select option {
+     padding: 0.3rem 0.5rem;
+     cursor: pointer;
+ }
+
+ #surah-select option:hover {
+     background-color: #bbf7d0;
+     color: #166534;
+ }
+
+ #surah-select::-webkit-scrollbar {
+     width: 8px;
+ }
+
+ #surah-select::-webkit-scrollbar-track {
+     background: #d1fae5;
+     border-radius: 4px;
+ }
+
+ #surah-select::-webkit-scrollbar-thumb {
+     background-color: #22c55e;
+     border-radius: 4px;
+ }
+
+ /* Books list styling */
+ #books-list {
+     list-style: none;
+     padding: 0;
+     max-width: 600px;
+     margin: 0 auto;
+ }
+
+ #books-list li {
+     background: #fef3c7;
+     margin: 0.5rem 0;
+     padding: 1rem 1.5rem;
+     border-radius: 0.75rem;
+     box-shadow: 0 2px 6px rgba(202, 138, 4, 0.3);
+     font-weight: 600;
+     cursor: pointer;
+     transition: background-color 0.3s ease, box-shadow 0.3s ease;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     gap: 0.75rem;
+ }
+
+ #books-list li:hover {
+     background-color: #fde68a;
+     box-shadow: 0 4px 12px rgba(202, 138, 4, 0.6);
+     color: #78350f;
+ }
+
+ #books-list li i {
+     color: #b45309;
+     font-size: 1.5rem;
+     flex-shrink: 0;
+ }
+
+ /* Modal styling for book descriptions */
+ .modal {
+     display: none;
+     position: fixed;
+     z-index: 1000;
+     left: 0;
+     top: 0;
+     width: 100%;
+     height: 100%;
+     overflow: auto;
+     background-color: rgba(0, 0, 0, 0.7);
+     padding-top: 60px;
+ }
+
+ .modal-content {
+     background-color: #fefefe;
+     margin: 5% auto;
+     padding: 20px;
+     border: 1px solid #888;
+     width: 80%;
+     max-width: 600px;
+     max-height: 80%;
+     border-radius: 1rem;
+     font-family: 'Amiri', serif;
+     overflow-y: auto;
+ }
+
+ .close {
+     color: #aaa;
+     float: right;
+     font-size: 28px;
+     font-weight: bold;
+     cursor: pointer;
+ }
+
+ .close:hover,
+ .close:focus {
+     color: black;
+     text-decoration: none;
+ }
+
+ .iframe-container {
+     width: 100%;
+     height: 400px;
+     border: none;
+     border-radius: 0.5rem;
+ }
+
+ /* Dark mode toggle */
+ body.dark-mode {
+     background: linear-gradient(to bottom, #0f172a, #1e293b);
+     color: #e2e8f0;
+ }
+
+ .quran-bg.dark-mode {
+     background: linear-gradient(to right, #1f2937, #374151);
+     color: #f1f5f9;
+ }
+
+ .azkar-bg.dark-mode {
+     background: linear-gradient(to right, #1f2937, #374151);
+     color: #f1f5f9;
+ }
+
+ .books-bg.dark-mode {
+     background: linear-gradient(to right, #1f2937, #374151);
+     color: #f1f5f9;
+ }
+
+ .tab {
+     transition: all 0.3s;
+ }
+
+ .dropdown {
+     max-height: 0;
+     overflow: hidden;
+     transition: max-height 0.5s ease;
+ }
+
+ .dropdown.show {
+     max-height: 500px;
+ }
+
+ /* Custom scrollbar for select */
+ select {
+     scrollbar-width: thin;
+     scrollbar-color: #22c55e #fce7f3;
+ }
+
+ select::-webkit-scrollbar {
+     width: 8px;
+ }
+
+ select::-webkit-scrollbar-thumb {
+     background-color: #22c55e;
+     border-radius: 4px;
+ }
+
+ .calendar {
+     max-width: 500px;
+     margin: 20px auto;
+     border: 1px solid #ddd;
+     border-radius: 10px;
+     padding: 10px;
+     background: white;
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ }
+
+ .calendar table {
+     width: 100%;
+     border-collapse: collapse;
+     text-align: center;
+ }
+
+ .calendar th {
+     background: #006400;
+     color: white;
+     padding: 8px;
+ }
+
+ .calendar td {
+     padding: 8px;
+     border: 1px solid #ddd;
+     vertical-align: top;
+     font-size: 12px;
+ }
+
+ .calendar .hijri {
+     display: block;
+     color: #006400;
+     font-size: 10px;
+ }
+
+
+ #daily-dua {
+     transform: scale(1);
+     transition: all 0.5s ease;
+ }
+
+ #daily-dua:hover {
+     transform: scale(1.01);
+ }
+
+ #dua-arabic,
+ #dua-english {
+     transition: opacity 0.4s ease;
+ }

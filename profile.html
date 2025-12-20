@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profile</title>
+  <link rel="stylesheet" href="style2.css" />
+</head>
+
+<body>
+  <div class="container" id="content">
+    <p class="muted" style="text-align:center;">Loading...</p>
+  </div>
+
+  <script>
+    const API = "http://localhost:5000"; // backend URL
+
+    async function loadProfile() {
+      const token = localStorage.getItem("token");
+
+      // Redirect if not logged in
+      if (!token) {
+        location.href = "login.html";
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API}/auth/profile`, {
+          method: "GET",
+          headers: { "Authorization": "Bearer " + token }
+        });
+
+        const d = await res.json();
+
+        if (!res.ok) {
+          alert(d.message || "Failed to load profile");
+          location.href = "login.html";
+          return;
+        }
+
+        // Display profile UI
+        document.getElementById("content").innerHTML = `
+          <h1>Your Profile</h1>
+
+          <p class="small"><strong>Name:</strong> ${d.name}</p>
+          <p class="small"><strong>Email:</strong> ${d.email}</p>
+          <p class="muted">Member since: ${new Date(d.createdAt).toLocaleDateString()}</p>
+
+          <button class="btn" id="logout" style="margin-top:20px;">Log Out</button>
+            <button id="signupBtn"><a href="index.html">home page</a></button>
+          
+        `;
+
+        document.getElementById("logout").onclick = () => {
+          localStorage.removeItem("token");
+          location.href = "login.html";
+        };
+
+      } catch (err) {
+        alert("Cannot connect to server. Make sure backend is running.");
+        console.error(err);
+        location.href = "login.html";
+      }
+    }
+
+    loadProfile();
+  </script>
+
+</body>
+
+</html>

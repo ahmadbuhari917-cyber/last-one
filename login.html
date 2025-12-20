@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Log In</title>
+  <link rel="stylesheet" href="style2.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>Log In</h1>
+
+    <input id="email" type="email" class="input-field" placeholder="Email Address" />
+    <input id="password" type="password" class="input-field" placeholder="Password" />
+
+    <button class="btn" id="btn">Log In</button>
+
+    <p class="muted">
+      Don't have an account?
+      <a class="link" href="signup.html">Sign up</a>
+    </p>
+  </div>
+
+  <script>
+    const API = "http://localhost:5000";  // Ensure backend is used, not file://
+
+    document.getElementById("btn").onclick = async () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!email || !password) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API}/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const d = await res.json();
+
+        if (res.ok && d.token) {
+          localStorage.setItem("token", d.token);
+          alert("Login successful!");
+          location.href = "profile.html";   // redirect
+        } else {
+          alert(d.message || d.error || "Login failed");
+        }
+
+      } catch (err) {
+        alert("Cannot connect to server. Make sure backend is running.");
+        console.error(err);
+      }
+    };
+  </script>
+
+</body>
+
+</html>

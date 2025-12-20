@@ -1,0 +1,53 @@
+/* Classic clean CSS */
+body {
+  background: #f7f5f0;
+  font-family: "Georgia", serif;
+  color: #222;
+}
+
+.container {
+  width: 380px;
+  margin: 70px auto;
+  background: #fff;
+  padding: 28px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  border: 1px solid #e6e2dd;
+}
+
+h2 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1a2a2f;
+  letter-spacing: 0.5px;
+}
+
+label { display:block; margin-top:10px; font-size:14px; color:#333; }
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top:6px;
+  border: 1px solid #cfc7bd;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 16px;
+  background: #2b5d6a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover { opacity: 0.95; }
+
+.muted { text-align:center; margin-top:12px; color:#666; font-size:14px; }
+.link { color:#2b5d6a; text-decoration:none; }
+.profile { max-width:700px; margin:40px auto; padding:20px; background:white; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.04); }
+.center { text-align:center; }
+.small { font-size:13px; color:#555; }
