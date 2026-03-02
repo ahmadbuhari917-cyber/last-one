@@ -368,17 +368,17 @@
 
  .quran-bg.dark-mode {
      background: linear-gradient(to right, #1f2937, #374151);
-     color: #f1f5f9;
+     color: #000000;
  }
 
  .azkar-bg.dark-mode {
      background: linear-gradient(to right, #1f2937, #374151);
-     color: #f1f5f9;
+     color: #000000;
  }
 
  .books-bg.dark-mode {
      background: linear-gradient(to right, #1f2937, #374151);
-     color: #f1f5f9;
+     color: #000000;
  }
 
  .tab {
@@ -458,4 +458,5 @@
  #dua-arabic,
  #dua-english {
      transition: opacity 0.4s ease;
+
  }
